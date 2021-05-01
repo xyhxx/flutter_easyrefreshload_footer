@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 
-class CustomSelfFooter extends Footer {
+class CupertinoLoadFooter extends Footer {
   final String loadingText;
   final String dragingText;
   final String dragedText;
@@ -10,7 +10,7 @@ class CustomSelfFooter extends Footer {
   final String noMoreText;
   final String errorText;
 
-  CustomSelfFooter({
+  CupertinoLoadFooter({
     double extent = 60.0,
     double triggerDistance = 70.0,
     bool float = false,
@@ -19,7 +19,7 @@ class CustomSelfFooter extends Footer {
     bool enableHapticFeedback = true,
     bool overScroll = true,
     bool safeArea = true,
-    EdgeInsets padding,
+    EdgeInsets? padding,
     this.loadingText = '正在加载中',
     this.dragingText = '上拉触发加载更多',
     this.dragedText = '松手加载更多',
@@ -47,12 +47,12 @@ class CustomSelfFooter extends Footer {
     double loadIndicatorExtent,
     AxisDirection axisDirection,
     bool float,
-    Duration completeDuration,
+    Duration? completeDuration,
     bool enableInfiniteLoad,
     bool success,
     bool noMore,
   ) {
-    Widget widget;
+    Widget? widget;
     String dragText = pulledExtent >= loadTriggerPullDistance ? dragedText : dragingText;
     String loadedText = noMore ? noMoreText : endText;
     String errorText = this.errorText;
@@ -94,14 +94,14 @@ class CustomSelfFooter extends Footer {
         break;
     }
 
-    return widget;
+    return widget!;
   }
 }
 
 class CustomSelfFooterContext extends StatelessWidget {
-  final double height;
-  final String text;
-  final Widget icon;
+  final double? height;
+  final String? text;
+  final Widget? icon;
 
   const CustomSelfFooterContext({this.height, this.text, this.icon});
 
@@ -116,8 +116,8 @@ class CustomSelfFooterContext extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if (icon != null) ...[icon, SizedBox(width: 15)],
-            Text(text, style: TextStyle(fontSize: 13, color: Color(0xff666666))),
+            if (icon != null) ...[icon!, SizedBox(width: 15)],
+            Text(text!, style: TextStyle(fontSize: 13, color: Color(0xff666666))),
           ],
         ),
       ),
