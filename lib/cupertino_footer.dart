@@ -77,7 +77,14 @@ class CupertinoLoadFooter extends Footer {
       case LoadMode.loaded:
       case LoadMode.done:
         if (success && !noMore) {
-          widget = null;
+          if (enableInfiniteLoad) {
+            widget = null;
+          } else {
+            widget = CustomSelfFooterContext(
+              height: loadIndicatorExtent,
+              text: endText,
+            );
+          }
         }
         if (!success) {
           widget = CustomSelfFooterContext(
