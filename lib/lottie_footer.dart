@@ -11,6 +11,7 @@ class LottieFooter extends Footer {
   final Widget errorWidget;
   final Widget noMoreWidget;
   int? duration;
+  bool dropdownLoop;
 
   LottieFooter({
     double extent = 60.0,
@@ -23,6 +24,7 @@ class LottieFooter extends Footer {
     bool safeArea = true,
     EdgeInsets? padding,
     this.duration,
+    this.dropdownLoop = true,
     required this.asset,
     this.endWidget = const Center(child: Text('加载完成', style: style)),
     this.errorWidget = const Center(child: Text('加载错误，请稍后再试', style: style)),
@@ -55,7 +57,6 @@ class LottieFooter extends Footer {
   ) {
     Widget widget = LottieContainer(
       asset: asset,
-      height: loadIndicatorExtent,
       key: _key,
       duration: duration,
     );
@@ -95,12 +96,12 @@ class LottieFooter extends Footer {
 class LottieContainer extends StatefulWidget {
   String asset;
   int? duration;
-  double height;
+  bool dropdownLoop;
 
   LottieContainer({
     Key? key,
     required this.asset,
-    required this.height,
+    this.dropdownLoop = true,
     this.duration,
   }) : super(key: key);
 
@@ -135,7 +136,11 @@ class _LottieContainerState extends State<LottieContainer> with SingleTickerProv
   void controllProgress(double progress) {
     if (!_startLoop) {
       _controller.animateTo(
-        progress > 1 ? progress % progress.floor() : progress,
+        progress > 1
+            ? widget.dropdownLoop
+                ? progress % progress.floor()
+                : 1
+            : progress,
         duration: Duration.zero,
       );
     }
