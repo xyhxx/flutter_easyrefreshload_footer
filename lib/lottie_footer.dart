@@ -135,7 +135,7 @@ class _LottieContainerState extends State<LottieContainer> with SingleTickerProv
   void controllProgress(double progress) {
     if (!_startLoop) {
       _controller.animateTo(
-        progress > 1 ? 1 : progress,
+        progress > 1 ? progress % progress.floor() : progress,
         duration: Duration.zero,
       );
     }

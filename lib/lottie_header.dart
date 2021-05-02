@@ -124,7 +124,7 @@ class _LottieContainerState extends State<LottieHeaderContainer> with SingleTick
   void controllProgress(double progress) {
     if (!_startLoop) {
       _controller.animateTo(
-        progress > 1 ? 1 : progress,
+        progress > 1 ? progress % progress.floor() : progress,
         duration: Duration.zero,
       );
     }
