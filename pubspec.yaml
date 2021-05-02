@@ -12,6 +12,8 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_easyrefresh: ^2.2.1 
+  animated_text_kit: ^4.2.1
+  lottie: ^1.0.1
 
 dev_dependencies:
   flutter_test:

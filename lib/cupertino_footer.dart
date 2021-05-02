@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 
+/// Cupertino风格load动画的底部组件
 class CupertinoLoadFooter extends Footer {
   final String loadingText;
   final String dragingText;
@@ -119,12 +120,9 @@ class CupertinoLoadFooterContext extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: height,
-      clipBehavior: Clip.hardEdge,
-      decoration: BoxDecoration(),
+    return Center(
       child: FractionallySizedBox(
-        widthFactor: .8,
+        widthFactor: .9,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
