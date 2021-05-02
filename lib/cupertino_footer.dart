@@ -52,7 +52,7 @@ class CupertinoLoadFooter extends Footer {
     bool success,
     bool noMore,
   ) {
-    Widget? widget;
+    late Widget widget;
     String dragText = pulledExtent >= loadTriggerPullDistance ? dragedText : dragingText;
     String loadedText = noMore ? noMoreText : endText;
     String errorText = this.errorText;
@@ -60,40 +60,45 @@ class CupertinoLoadFooter extends Footer {
 
     switch (loadState) {
       case LoadMode.drag:
-        widget = CustomSelfFooterContext(
+        widget = CupertinoLoadFooterContext(
           height: loadIndicatorExtent,
           text: dragText,
         );
         break;
       case LoadMode.armed:
       case LoadMode.load:
-        widget = CustomSelfFooterContext(
+        widget = CupertinoLoadFooterContext(
           height: loadIndicatorExtent,
           text: loadingText,
           icon: icon,
         );
         break;
-      case LoadMode.inactive:
       case LoadMode.loaded:
+        widget = CupertinoLoadFooterContext(
+          height: loadIndicatorExtent,
+          text: endText,
+        );
+        break;
+      case LoadMode.inactive:
       case LoadMode.done:
         if (success && !noMore) {
           if (enableInfiniteLoad) {
-            widget = null;
+            widget = SizedBox.shrink();
           } else {
-            widget = CustomSelfFooterContext(
+            widget = CupertinoLoadFooterContext(
               height: loadIndicatorExtent,
               text: endText,
             );
           }
         }
         if (!success) {
-          widget = CustomSelfFooterContext(
+          widget = CupertinoLoadFooterContext(
             height: loadIndicatorExtent,
             text: errorText,
           );
         }
         if (success && noMore) {
-          widget = CustomSelfFooterContext(
+          widget = CupertinoLoadFooterContext(
             height: loadIndicatorExtent,
             text: loadedText,
           );
@@ -101,16 +106,16 @@ class CupertinoLoadFooter extends Footer {
         break;
     }
 
-    return widget!;
+    return widget;
   }
 }
 
-class CustomSelfFooterContext extends StatelessWidget {
+class CupertinoLoadFooterContext extends StatelessWidget {
   final double? height;
   final String? text;
   final Widget? icon;
 
-  const CustomSelfFooterContext({this.height, this.text, this.icon});
+  const CupertinoLoadFooterContext({this.height, this.text, this.icon});
 
   @override
   Widget build(BuildContext context) {
